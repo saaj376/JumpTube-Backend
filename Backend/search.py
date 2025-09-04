@@ -110,36 +110,3 @@ class YoutubeSearch:
     def search_and_link(self, query: str, maxresults: int = 20) -> List[Dict[str, str]]:
         return self.youtube.search(query, maxresults)
 
-
-if __name__ == "__main__":
-    YOUTUBE_API_KEY = "AIzaSyBYtQrrgFlQeYQPeQhK7BhVx8UbaL9KZhU"
-    GEMINI_API_KEY = "AIzaSyDWMmKrphy7MJBlkW3X6x7MhtBRPEvt-mg"
- 
-    yt = YoutubeSearch(apikey=YOUTUBE_API_KEY, api_key=GEMINI_API_KEY)
-    sample_url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-    
-    # First search
-    print("=== First Search ===")
-    prompt = "hope"  # Use keywords that are likely in the video
-    timestamp_results = yt.search_timestamps(sample_url, prompt, top_k=3)
-    
-    if timestamp_results:
-        print(f"Found {len(timestamp_results)} results:")
-        for res in timestamp_results:
-            print(f"[{res['time']}] {res['text']}")
-            print(f"🔗 {res['url']}\n")
-    else:
-        print("No results found")
-    
-    # Second search (should use cached transcript)
-    print("=== Second Search (using cache) ===")
-    prompt2 = "give up"
-    timestamp_results2 = yt.search_timestamps(sample_url, prompt2, top_k=3)
-    
-    if timestamp_results2:
-        print(f"Found {len(timestamp_results2)} results:")
-        for res in timestamp_results2:
-            print(f"[{res['time']}] {res['text']}")
-            print(f"🔗 {res['url']}\n")
-    else:
-        print("No results found")

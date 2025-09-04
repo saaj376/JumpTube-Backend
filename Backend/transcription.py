@@ -42,28 +42,25 @@ class YoutubeTranscriber:
             print("Processing the audio")
             audio_np=self.processaudiostream(audio_url)
             print("Starting transcription on the youtube video: ")
+            
             starttime=time.time()
             segments,info=self.model.transcribe(audio_np,beam_size=5)
             transcript_lines = []
+
             for segment in segments:
                 start_time = math.floor(segment.start)
-                # Format each line as "[seconds] text"
                 line = f"[{start_time}] {segment.text.strip()}"
                 transcript_lines.append(line)
             
-            # Join all the formatted lines together with a newline
+        
             full_transcript_with_timestamps = "\n".join(transcript_lines)
             endtime=time.time()
             totaltime=endtime-starttime
             print("Transcription finished in ",totaltime,"seconds")
             return full_transcript_with_timestamps
+        
         except FileNotFoundError as e:
             print("Please make sure yt-dlp and ffmpeg are installed in your path")
         except Exception as e:
             print("Some error ma, kindly debug")
 
-if __name__=="__main__":
-    video_url="https://www.youtube.com/watch?v=b-Pn0yXL9y8"
-    transcriber=YoutubeTranscriber(model_size="tiny.en")
-    transcript=transcriber.transcribe(video_url)
-    print(transcript)

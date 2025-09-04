@@ -1,7 +1,7 @@
 from google import genai
 from transcription import YoutubeTranscriber
 
-class videosummarizer:
+class VideoSummarizer:
     def __init__(self,api_key,model_size="tiny.en"):
         self.transcriber=YoutubeTranscriber(model_size=model_size)
         self.client=genai.Client(api_key=api_key)
@@ -14,10 +14,3 @@ class videosummarizer:
             return response.text
         else:
             return "Transcription failed"
-if __name__ =="__main__":
-    api_key=""
-    video_url="https://www.youtube.com/watch?v=b-Pn0yXL9y8"
-    summarizer=videosummarizer(api_key=api_key)
-    summary=summarizer.summarize(video_url)
-    print("Summary")
-    print(summary)
