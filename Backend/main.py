@@ -24,6 +24,8 @@ app.add_middleware(
 )
 yt_client=YoutubeClient(YOUTUBE_API_KEY)
 yt_search=YoutubeSearch(apikey=YOUTUBE_API_KEY,api_key=GEMINI_API_KEY)
+video_summarizer = VideoSummarizer(api_key=GEMINI_API_KEY)
+
 class videoinfo(BaseModel):
     video_id:str
     title:str
@@ -87,7 +89,7 @@ async def invideosearch(request:invideosearchrequest):
             raise HTTPException(status_code=400,detail="Video URL cannot be empty")
         if not request.prompt.strip():
             raise HTTPException(status_code=400,detail="Prompt cannot be empty")
-        matches=yt_search.search_in_video(request.video_url,request.prompt,request.top_k)
+        matches=yt_search.search_timestamps(request.video_url,request.prompt,request.top_k)
         return invideosearchresponse(
             video_url=request.video_url,
             prompt=request.prompt,
@@ -103,7 +105,7 @@ async def summarize_video(request:SummarizeRequest):
     try:
         if not request.video_url.strip():
             raise HTTPException(status_code=400,detail="Video URL cannot be empty")
-        summary=VideoSummarizer.summarize(request.video_url)
+        summary=video_summarizer.summarize(request.video_url)
         return SummarizeResponse(video_url=request.video_url,summary=summary)
     except HTTPException:
         raise
