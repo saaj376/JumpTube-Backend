@@ -1,79 +1,113 @@
+import React from 'react';
 import { motion } from 'framer-motion';
-import { PlayIcon, ClockIcon, DocumentTextIcon, SparklesIcon } from '@heroicons/react/24/outline';
+import { PlayIcon, MagnifyingGlassIcon, ClockIcon, SparklesIcon } from '@heroicons/react/24/outline';
 
-export default function Hero() {
-  const features = [
-    {
-      icon: <PlayIcon className="h-6 w-6" />,
-      title: "Smart Search",
-      description: "Find YouTube videos with intelligent search algorithms"
-    },
-    {
-      icon: <ClockIcon className="h-6 w-6" />,
-      title: "Timestamp Search",
-      description: "Jump to specific moments within videos instantly"
-    },
-    {
-      icon: <DocumentTextIcon className="h-6 w-6" />,
-      title: "AI Summaries",
-      description: "Get concise summaries of video content powered by AI"
-    }
-  ];
-
+const Hero: React.FC = () => {
   return (
-    <section className="relative py-20 bg-gradient-to-br from-gray-50 to-white overflow-hidden">
-      <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+    <section className="relative bg-gradient-to-br from-red-50 via-white to-orange-50 py-20 overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-red-100 rounded-full opacity-20"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-orange-100 rounded-full opacity-20"></div>
+      </div>
+      
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
+        <div className="text-center">
           <motion.div
-            className="inline-flex items-center space-x-2 bg-youtube-red/10 text-youtube-red px-4 py-2 rounded-full text-sm font-medium mb-6"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", stiffness: 200, damping: 10 }}
+            className="mb-8"
           >
-            <SparklesIcon className="h-4 w-4" />
-            <span>Powered by AI</span>
+            <div className="bg-gradient-to-r from-red-500 to-red-600 p-4 rounded-2xl w-20 h-20 mx-auto flex items-center justify-center shadow-lg">
+              <PlayIcon className="h-10 w-10 text-white" />
+            </div>
           </motion.div>
           
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-            Search YouTube
-            <span className="gradient-text block">Smarter</span>
-          </h1>
+          <motion.h1
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="text-5xl md:text-6xl font-bold text-gray-900 mb-6"
+          >
+            Jump to Any
+            <span className="gradient-text block">YouTube Moment</span>
+          </motion.h1>
           
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Discover videos, find specific moments, and get AI-powered summaries. 
-            JumpTube makes YouTube search intelligent and efficient.
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto"
-        >
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 + index * 0.1 }}
-              className="text-center group"
-            >
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-youtube-red/10 text-youtube-red rounded-2xl mb-4 group-hover:bg-youtube-red group-hover:text-white transition-all duration-300">
-                {feature.icon}
+          <motion.p
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed"
+          >
+            Search YouTube videos, find specific moments with AI-powered timestamp search, 
+            and get instant summaries. The smartest way to navigate video content.
+          </motion.p>
+          
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.6 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-12"
+          >
+            <div className="flex flex-col items-center">
+              <div className="bg-blue-100 p-4 rounded-xl mb-4">
+                <MagnifyingGlassIcon className="h-8 w-8 text-blue-600" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
-              <p className="text-gray-600">{feature.description}</p>
-            </motion.div>
-          ))}
-        </motion.div>
+              <h3 className="font-semibold text-gray-900 mb-2">Smart Video Search</h3>
+              <p className="text-gray-600 text-center">
+                Find exactly what you're looking for across millions of YouTube videos
+              </p>
+            </div>
+            
+            <div className="flex flex-col items-center">
+              <div className="bg-green-100 p-4 rounded-xl mb-4">
+                <ClockIcon className="h-8 w-8 text-green-600" />
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2">Timestamp Precision</h3>
+              <p className="text-gray-600 text-center">
+                Jump directly to specific moments within any video using AI search
+              </p>
+            </div>
+            
+            <div className="flex flex-col items-center">
+              <div className="bg-purple-100 p-4 rounded-xl mb-4">
+                <SparklesIcon className="h-8 w-8 text-purple-600" />
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2">AI Summaries</h3>
+              <p className="text-gray-600 text-center">
+                Get concise, intelligent summaries of any video content instantly
+              </p>
+            </div>
+          </motion.div>
+          
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.8 }}
+            className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4"
+          >
+            <motion.a
+              href="#search"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="btn-primary text-lg px-8 py-4"
+            >
+              Start Searching
+            </motion.a>
+            <motion.a
+              href="#features"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="btn-secondary text-lg px-8 py-4"
+            >
+              Learn More
+            </motion.a>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
-}
+};
+
+export default Hero;

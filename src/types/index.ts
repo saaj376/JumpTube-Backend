@@ -1,4 +1,4 @@
-export interface VideoInfo {
+export interface Video {
   video_id: string;
   title: string;
   description: string;
@@ -7,7 +7,7 @@ export interface VideoInfo {
 
 export interface SearchResponse {
   query: string;
-  results: VideoInfo[];
+  results: Video[];
   total_results: number;
 }
 
@@ -18,23 +18,17 @@ export interface InVideoMatch {
   url: string;
 }
 
-export interface InVideoSearchRequest {
-  video_url: string;
-  prompt: string;
-  top_k?: number;
-}
-
 export interface InVideoSearchResponse {
   video_url: string;
   prompt: string;
   matches: InVideoMatch[];
 }
 
-export interface SummarizeRequest {
-  video_url: string;
-}
-
 export interface SummarizeResponse {
   video_url: string;
   summary: string;
+}
+
+export interface ApiError {
+  detail: string;
 }
