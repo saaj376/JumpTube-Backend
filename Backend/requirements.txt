@@ -1,0 +1,22 @@
+# Core backend
+fastapi
+uvicorn[standard]
+python-multipart
+requests
+numpy
+python-dotenv
+
+# Faster Whisper
+faster-whisper
+torch
+torchaudio
+
+# YouTube API
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib
+
+# Google Generative AI
+google-generativeai
+
+
